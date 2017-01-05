@@ -233,7 +233,7 @@ struct himax_ts_data {
 	struct wake_lock ts_SMWP_wake_lock;
 #endif
 
-	uint8_t buttons_enable;
+        uint8_t buttons_enable;
 };
 
 static struct himax_ts_data *private_ts;

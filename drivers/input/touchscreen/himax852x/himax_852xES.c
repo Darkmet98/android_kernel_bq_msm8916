@@ -1038,7 +1038,7 @@ static void himax_ts_button_func(int tp_key_index,struct himax_ts_data *ts)
 {
 	uint16_t x_position = 0, y_position = 0;
 
-	if (!ts->buttons_enable) return;
+               if (!ts->buttons_enable) return;
 
 	if (tp_key_index != 0x00) {
 		I("virtual key index = %d, virtual_key = 0x%p\n", tp_key_index, ts->pdata->virtual_key);
@@ -2191,14 +2191,14 @@ static int himax_touch_sysfs_init(void)
 		return ret;
 	}
 	#endif
-
-	ret = sysfs_create_file(android_touch_kobj, &dev_attr_buttons.attr);
-	if (ret) 
-	{
-		E("sysfs_create_file dev_attr_buttons failed\n");
-		return ret;
-	}
 	
+	ret = sysfs_create_file(android_touch_kobj, &dev_attr_buttons.attr);
+ 	if (ret) 
+ 	{
+ 		E("sysfs_create_file dev_attr_buttons failed\n");
+ 		return ret;
+ 	}
+
 	return 0 ;
 }
 
@@ -2223,7 +2223,7 @@ static void himax_touch_sysfs_deinit(void)
 	sysfs_remove_file(android_touch_kobj, &dev_attr_SMWP.attr);
 	#endif
 
-	sysfs_remove_file(android_touch_kobj, &dev_attr_buttons.attr);
+        sysfs_remove_file(android_touch_kobj, &dev_attr_buttons.attr);
 	
 	kobject_del(android_touch_kobj);
 }
@@ -2571,7 +2571,7 @@ static int himax852xes_probe(struct i2c_client *client, const struct i2c_device_
 #endif
 	HW_RESET_ACTIVATE = 0;
 
-	ts->buttons_enable = 1;
+        ts->buttons_enable = 1;
 
 	if (client->irq) {
 		err = himax_ts_register_interrupt(ts->client);
@@ -2822,7 +2822,6 @@ static int fb_notifier_callback(struct notifier_block *self,
 
 		case FB_BLANK_POWERDOWN:
 		case FB_BLANK_HSYNC_SUSPEND:
-		case FB_BLANK_VSYNC_SUSPEND:
 			if (event == FB_EARLY_EVENT_BLANK)
 				himax852xes_suspend(&ts->client->dev);
 
